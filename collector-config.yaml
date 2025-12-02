@@ -11,8 +11,10 @@ processors:
 exporters:
   otlphttp/supabase:
     endpoint: https://oqrqdofbtytcihfttlau.supabase.co/functions/v1/otel
+    compression: none
     headers:
-      apikey: "${SUPABASE_SERVICE_ROLE_KEY}"
+      Authorization: "Bearer ${SUPABASE_SERVICE_ROLE_KEY}"
+      Content-Type: "application/json"
 
 service:
   pipelines:
@@ -20,10 +22,12 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [otlphttp/supabase]
+
     logs:
       receivers: [otlp]
       processors: [batch]
       exporters: [otlphttp/supabase]
+
     metrics:
       receivers: [otlp]
       processors: [batch]
