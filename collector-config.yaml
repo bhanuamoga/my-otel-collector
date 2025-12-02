@@ -2,6 +2,8 @@ receivers:
   otlp:
     protocols:
       http:
+        endpoint: "0.0.0.0:4318"
+        include_metadata: true
 
 processors:
   batch:
@@ -12,18 +14,21 @@ exporters:
   otlphttp/supabase_logs:
     endpoint: https://oqrqdofbtytcihfttlau.supabase.co/functions/v1/otel/v1/logs
     compression: none
+    encoding: json
     headers:
       apikey: "${SUPABASE_SERVICE_ROLE_KEY}"
 
   otlphttp/supabase_traces:
     endpoint: https://oqrqdofbtytcihfttlau.supabase.co/functions/v1/otel/v1/traces
     compression: none
+    encoding: json
     headers:
       apikey: "${SUPABASE_SERVICE_ROLE_KEY}"
 
   otlphttp/supabase_metrics:
     endpoint: https://oqrqdofbtytcihfttlau.supabase.co/functions/v1/otel/v1/metrics
     compression: none
+    encoding: json
     headers:
       apikey: "${SUPABASE_SERVICE_ROLE_KEY}"
 
