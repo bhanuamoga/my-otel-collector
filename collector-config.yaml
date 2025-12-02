@@ -11,6 +11,7 @@ exporters:
   otlphttp/supabase_logs:
     endpoint: https://oqrqdofbtytcihfttlau.supabase.co/functions/v1/otel
     compression: none
+    encoding: json        # ★ FORCE JSON
     headers:
       apikey: "${SUPABASE_SERVICE_ROLE_KEY}"
 
