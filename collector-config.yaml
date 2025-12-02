@@ -13,8 +13,7 @@ exporters:
     endpoint: https://oqrqdofbtytcihfttlau.supabase.co/functions/v1/otel
     compression: none
     headers:
-      Authorization: "Bearer ${SUPABASE_SERVICE_ROLE_KEY}"
-      Content-Type: "application/json"
+      apikey: "${SUPABASE_SERVICE_ROLE_KEY}"
 
 service:
   pipelines:
