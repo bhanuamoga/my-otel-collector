@@ -1,0 +1,30 @@
+receivers:
+  otlp:
+    protocols:
+      http: {}
+
+processors:
+  batch:
+    timeout: 5s
+    send_batch_size: 512
+
+exporters:
+  otlphttp/supabase:
+    endpoint: https://oqrqdofbtytcihfttlau.supabase.co/functions/v1/otel
+    headers:
+      apikey: "${SUPABASE_SERVICE_ROLE_KEY}"
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp/supabase]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp/supabase]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp/supabase]
